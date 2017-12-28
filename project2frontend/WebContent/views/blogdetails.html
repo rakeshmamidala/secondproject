@@ -1,0 +1,29 @@
+<h3>Approved BlogPost</h3>
+<div class="row">
+	<div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<b>{{blogPost.blogTitle}}</b>
+				<b>Created By:</b>{{blogPost.postedBy.firstname}}<br>
+				<b>Created On:</b>{{blogPost.postedOn | date:'yyyy:MM:dd'}}		
+			</div>
+			
+			<div class="panel-body">
+				{{blogPost.blogContent}}
+			</div>
+			
+			<a></a>
+			<br>
+		</div>
+	</div>
+</div>
+<b>Number of Likes</b>{{blogPost.likes}}
+<div nng-show="liked">
+	<span class="glyphicon glyphicon-thumbs-up" style="color:blue" ng-click="updateLikes()"></span>
+</div>
+
+<div nng-show="!liked">
+	<span class="glyphicon glyphicon-thumbs-up" style="color:black" ng-click="updateLikes()"></span>
+</div>
+Blog Comments
+ 
