@@ -14,6 +14,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.model.BlogComment;
 import com.niit.model.BlogPost;
 import com.niit.model.BlogPostLikes;
 import com.niit.model.Job;
@@ -41,7 +42,7 @@ public class DBConfiguration
 	  
 	  lsf.addProperties(hibernateProperties);
 	  
-	  Class classes[] =new Class[]{User.class,Job.class,BlogPost.class,Notification.class,BlogPostLikes.class};
+	  Class classes[] =new Class[]{User.class,Job.class,BlogPost.class,Notification.class,BlogPostLikes.class,BlogComment.class};
 	  
 	  return lsf.addAnnotatedClasses(classes).buildSessionFactory();
   }

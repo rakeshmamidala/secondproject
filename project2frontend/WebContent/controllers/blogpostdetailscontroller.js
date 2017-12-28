@@ -53,7 +53,7 @@ app.controller('BlogPostDetailsController',function($scope,$location,$routeParam
 })
 
 	$scope.updateLikes=function()
-	{
+	{ 
 		BlogService.updateLikes($scope.blogPost).then(function(response){
 			$scope.blogPost=response.data;
 			$scope.liked=!$scope.liked;
@@ -63,5 +63,12 @@ app.controller('BlogPostDetailsController',function($scope,$location,$routeParam
 				$location.path('/login')
 			}
 		})
+		
+		
+		$scope.addComment=function(){
+			alert($scope.blogComment.commentText)
+			$scope.blogComment.blogPost=$scope.blogPost
+			alert($scope.blogComment.blogPost.id)
+		}
 
 	}

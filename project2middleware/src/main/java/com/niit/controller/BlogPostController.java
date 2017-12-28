@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.niit.Dao.BlogPostDao;
 import com.niit.Dao.BlogPostLikesDao;
 import com.niit.Dao.UserDao;
+import com.niit.model.BlogComment;
 import com.niit.model.BlogPost;
 import com.niit.model.BlogPostLikes;
 import com.niit.model.ErrorClazz;
@@ -152,4 +153,28 @@ public class BlogPostController
 	  return new ResponseEntity<BlogPost>(updatedBlogPost,HttpStatus.OK);
   }
   
+  @RequestMapping(value="/addcomment",method=RequestMethod.POST)
+  public ResponseEntity<?> addBlogCommnet(@RequestBody BlogComment blogComment,HttpSession session)
+  {
+	  String username=(String) session.getAttribute("username");
+	  if(username==null)
+	  {
+		  ErrorClazz error=new ErrorClazz(5,"Unauthorized access");
+		  return new ResponseEntity<ErrorClazz>(error,HttpStatus.UNAUTHORIZED);
+	  } 
+	  
+	  User commentedBy=userDao.getUserByUsername(username);
+	  blogComment.setCommentedBy(commentedBy);
+	  
+	  blogComment.setCommentedOn(new Date());
+	  try{
+	  blogPostDao.addComment(blogComment);
+	  }
+	  catch(Exception e)
+	  {
+		  ErrorClazz error=new ErrorClazz(7,"unable tp post comments" + e.getMessage());
+		  return new ResponseEntity<ErrorClazz>(error,HttpStatus.INTERNAL_SERVER_ERROR);
+	  }
+	  return new ResponseEntity<BlogComment>(blogComment,HttpStatus.OK);
+  }
 }

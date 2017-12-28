@@ -46,7 +46,7 @@ public class BlogPostLikesDaoImpl implements BlogPostLikesDao
 		{
 			session.delete(blogPostLikes);
 			blogPost.setLikes(blogPost.getLikes() - 1);
-			session.update(blogPost);
+			session.merge(blogPost);
 		}
 		return blogPost;
 	}

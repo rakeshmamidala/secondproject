@@ -1,6 +1,7 @@
 package com.niit.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,14 +29,11 @@ public class BlogPost
 	private Date postedOn;
 	@ManyToOne
 	private User postedBy;
-	public User getPostedBy() {
-		return postedBy;
-	}
-	public void setPostedBy(User postedBy) {
-		this.postedBy = postedBy;
-	}
+	
 	private boolean approved;
 	private int likes;
+	@OneToMany(mappedBy="blogPost")
+	private List<BlogComment> blogComments;
 	
 	public int getId() {
 		return id;
@@ -71,5 +70,11 @@ public class BlogPost
 	}
 	public void setLikes(int likes) {
 		this.likes = likes;
+	}
+	public User getPostedBy() {
+		return postedBy;
+	}
+	public void setPostedBy(User postedBy) {
+		this.postedBy = postedBy;
 	}
 }
